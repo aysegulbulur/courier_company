@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: com.project.courierCompany.console
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: delll
+Implementation-Vendor-Id: com.courierCompany
+Build-Jdk: 1.8.0_161
+Implementation-URL: http://projects.spring.io/spring-boot/com.project.
+ courierCompany.console/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
