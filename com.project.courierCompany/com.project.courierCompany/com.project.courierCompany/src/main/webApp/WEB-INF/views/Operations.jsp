@@ -19,6 +19,11 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<%@page import="com.courierCompany.com.project.courierCompany.JspLogger"%>
+	<%JspLogger iLogger = new JspLogger();
+	  iLogger.jspPage();%>
+	<%@include file="script.js" %>
 </head>
 <body bgcolor="#CCFFFF">
 	<center>
@@ -26,80 +31,13 @@
 		<h1>${message}</h1>
 		<!-- The message is received from the WelcomeController page. -->
 		<br></br>
-		<input type="text" style="width: 300px; height: 40px" id="txtTarget" name="target" placeholder="Please write in kilograms of your package..."/>
+		<input type="text" style="width: 300px; height: 40px" id="txtTarget" placeholder="Please write in kilograms of your package..."/>
     	<br></br>
-    	<input type="submit" class="btn btn-primary" id="btnCheck" value="Check"/>
+    	<input type="button" class="btn btn-primary" value="Check" onclick="preparePackage()"/>
     	<br></br>
-    	<label id="lblTarget"></label>
+    	<p id="second"></p>
     	<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
     	<label id="lblInformation" color="white" >*You can send a package of minimum 2 kg and maximum 30 kg....</label>
 	</center>
-	<script>
-		var calculation=document.getElementById("txtTarget");
-		var btnCalculation=document.getElementById("btnCheck");
-		<!-- document.getElementById : Its id takes the reference of the specified element. -->
-		
-		btnCalculation.onclick=function(){
-			var text="";	<!-- When run, lbl comes as free space. -->
-			var target=Number(calculation.value);	<!-- Account value is of type Number -->
-			
-			var septuple = 0, multiplesOfTwo = 0, remainderInDivision;
-			<!-- septuple : 7 kg , multiplesOfTwo : 2 kg , remainderInDevision : Remainder from dividing by 7 or 2 -->
-			var flag = new Boolean(true);
-			<!-- Outputs will be generated according to true and false status. -->
-			
-			try{
-				if(target == "") throw "Please do not leave blank...";
-				if(isNaN(target)) throw "Please write the value as integer...";
-				
-				if(0 < target && target <= 30){
-					if (target < 7){
-						if(target % 2 == 0){
-							multiplesOfTwo = target / 2;
-							text = "Use " + multiplesOfTwo + " grains, 2 kilograms of soap..." + "<br>" + "To reach the " + target + 
-								" kilograms we can create a " + target + " kilograms package with " + multiplesOfTwo + 
-								" ,2 kilograms soaps...";
-						
-						}
-						else{
-							flag = false;
-						}
-					}
-					else{
-						septuple = parseInt(target / 7);
-						remainderInDivision = target % 7;
-						if(target % 7 == 0){
-							text = "No soap of 2 kilograms is used...." + "<br>" + "To reach the " + target + 
-								" kilograms we can create a " + target + " kilograms package with " + septuple + 
-								" ,7 kilograms soaps...";
-						
-						}
-						else{
-							if(remainderInDivision % 2 == 0){
-								multiplesOfTwo = remainderInDivision / 2;
-								text = "Use " + multiplesOfTwo + " grains, 2 kilograms of soap..." + "<br>" + "In order to reach the " + target + 
-									" kilogram, we can create a " + target + " kilogram package with " + septuple + " of 7 kilograms and " + multiplesOfTwo + " pieces of 2 kilograms of soap...";
-							
-							}
-							else{
-								flag = false;
-							}
-						}
-					}
-				}
-				else{
-					flag = false;
-				}
-				if(flag == false){
-					text = "-1" + "<br>" + "We cannot reach the " + target + " kilogram with 7 and 2 kilogram packages....";
-				}
-				document.getElementById("lblTarget").innerHTML=text;
-			}
-			catch(err){
-				document.getElementById("lblTarget").innerHTML=err;
-			}
-		}
-			
-	</script>
 </body>
 </html>
